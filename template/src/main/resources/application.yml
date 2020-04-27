@@ -1,0 +1,92 @@
+#server端口配置
+server:
+  port: 9003
+spring:
+#  redis配置
+#  redis:
+  ##    host: localhost
+  ##    port: 6379
+  ##    jedis:
+  ##      pool:
+  ##        max-wait: 30000
+  ##        max-active: 100
+  ##        max-idle: 20
+  ##        min-idle: 0
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+#    password: redis123
+    timeout: 30000
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  cache:
+    redis:
+      time-to-live: -1
+#  数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/nike_db?useUnicode=true&useSSL=true&verifyServerCertificate=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化大小，最小，最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat: true
+  #    rabbbitmq配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    # 开启confirms回调 P -> Exchange
+    publisher-confirms: true
+    # 开启returnedMessage回调 Exchange -> Queue
+    publisher-returns: true
+    # 设置手动确认(ack) Queue -> C
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 100
+#      邮件配置
+  mail:
+    host: smtp.qq.com
+    username: 364297143@qq.com
+    password: xooysfifwrlzbijd
+    from: 364297143@qq.com
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          prefetch:
+            required: true
+# mybatis配置
+mybatis:
+  mapperlocations: classpath:com/fruit/template/**/mapper/*.xml
