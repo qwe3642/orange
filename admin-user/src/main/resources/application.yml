@@ -1,16 +1,16 @@
 #server端口配置
 server:
-  port: 9002
+  port: 9003
 #  servlet:
-#    context-path: /template
+#    context-path: /admin-user
 spring:
   application:
-    name: template
+    name: admin-user
   #consul配置
   cloud:
     consul:
       discovery:
-        service-name: template
+        service-name: admin-user
         hostname: localhost
       host: localhost
       port: 8500
@@ -99,6 +99,7 @@ spring:
             enable: true
           prefetch:
             required: true
+
 # mybatis配置
 mybatis:
   mapperlocations: classpath:com/fruit/template/**/mapper/*.xml
