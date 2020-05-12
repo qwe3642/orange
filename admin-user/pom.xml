@@ -13,13 +13,9 @@
     <name>admin-user</name>
     <description>Demo project for Spring Boot</description>
 
-
     <dependencies>
 
-
     </dependencies>
-
-
 
     <build>
         <plugins>
@@ -28,6 +24,23 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                    <!--<include>**/*.xml</include>-->
+                    <!--<include>**/*.tld</include>-->
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

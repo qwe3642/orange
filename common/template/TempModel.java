@@ -27,7 +27,7 @@ import com.fruit.${module}.dto.${className}Dto;
  * @version
  * 
  */
-public class ${className}Info extends BasInfo {
+public class ${className}Info extends BaseInfo {
 	
 	/**
 	 * 注释内容
