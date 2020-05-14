@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.adminuser.system.mapper.XtJsMapper" > 
+	<!--  角色 -->
+	<resultMap id="BaseResultMap" type="com.fruit.adminuser.system.dto.XtJsDto" >
+		<!-- 字段: [] -->
+		<result column="id" property="id"/>
+		<!-- 字段: [] -->
+		<result column="code" property="code"/>
+		<!-- 字段: [] -->
+		<result column="name" property="name"/>
+	</resultMap>
+	       
+	<!-- ut_xt_js table all fields -->
+	<sql id="Base_Column_List" >
+		 id,code,name
+	</sql>
+	     
+	<!-- 查询条件 -->
+	<sql id="Example_Where_Clause">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test='id != null'>
+				and id = #{id}
+			</if>
+			<if test='code != null and code != ""'>
+				and code = #{code}
+			</if>
+			<if test='name != null and name != ""'>
+				and name = #{name}
+			</if>
+		</trim>
+	</sql>
+	   
+	<!-- 插入记录 -->
+	<insert id="add" parameterType="Object" >
+		insert into ut_xt_js
+		  (id,code,name)
+		values
+		  (#{id},#{code},#{name})
+	</insert>
+	
+	<!-- 插入记录 -->
+	<insert id="batchAdd" parameterType="List" >
+	  insert into ut_xt_js (id,code,name)  
+	   values
+	 	<foreach collection="list" item="obj" index="index" separator=", " > 
+			  (#{obj.id},#{obj.code},#{obj.name})
+		</foreach>
+	</insert>
+	
+	<!-- 根据id，修改记录-->  
+	<update id="update" parameterType="Object" >
+	 	update ut_xt_js
+		  set code=#{code},
+		      name=#{name}
+		 where id=#{id}
+	</update>
+	 
+	<!-- 修改记录，只修改只不为空的字段 -->
+	<update id="updateBySelective" parameterType="Object" >
+		update ut_xt_js
+		  set 
+		<trim  suffixOverrides=",">
+			<if test="code != null and code != ''">
+				code=#{code},
+			</if>
+			<if test="name != null and name != ''">
+				name=#{name}
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
+	
+	<!-- 删除记录 -->
+	<delete id="delete" parameterType="Object">
+		delete from ut_xt_js
+		 where id = #{id}
+	</delete>
+	
+	<!-- 批量删除记录 -->
+	<delete id="batchDelete" parameterType="List">
+		delete from ut_xt_js
+		 where id in 
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据条件删除记录 -->
+	<delete id="deleteByCondtion" parameterType="Object">
+		delete from ut_xt_js
+		<include refid="Example_Where_Clause"/>
+	</delete>
+	
+	<!-- 根据id查询 角色 -->
+	<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+		select <include refid="Base_Column_List" />
+		  from ut_xt_js
+		 where id = #{id}
+	</select>
+	
+	<!-- 角色 列表总数-->
+	<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+		select count(1) from ut_xt_js 
+		<include refid="Example_Where_Clause"/>
+	</select>
+
+	<select id="login" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from ut_xt_ry where username=#{username} and password=#{password}
+	</select>
+</mapper>

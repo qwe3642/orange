@@ -42,7 +42,7 @@ spring:
 #  数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/nike_db?useUnicode=true&useSSL=true&verifyServerCertificate=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/fruit?useUnicode=true&useSSL=true&verifyServerCertificate=false&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: root
     # 下面为连接池的补充设置，应用到上面所有数据源中
@@ -102,7 +102,7 @@ spring:
 
 # mybatis配置
 mybatis:
-  mapperlocations: classpath:com/fruit/template/**/mapper/*.xml
+  mapperlocations: classpath:com/fruit/adminuser/**/mapper/*.xml
 management:
   endpoint:
     health:
